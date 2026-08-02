@@ -4,6 +4,8 @@ This project integrates the
 [Grove water level sensor](https://wiki.seeedstudio.com/Grove-Water-Level-Sensor/)
 from Seeed Studio into ESPHome.
 
+![Photo of the sensor](images/Grove-Water-Level-Sensor-10CM-wiki.jpg)
+
 This sensor is a capacitance-based sensor with a conformal coating
 that allows it to be submerged in water without deterioration common
 to resistive sensors.
