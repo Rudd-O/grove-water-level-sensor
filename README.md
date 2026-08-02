@@ -69,3 +69,16 @@ sensor:
     # cells, summing each cell's 0-100% value and dividing by the number of cells.
     name: Moisture
 ```
+
+## Configuration parameters for platform `grove_water_level`
+
+FIXME.
+
+## Development
+
+To run Python checks locally:
+
+```bash
+pip install ruff
+ruff check .
+```
