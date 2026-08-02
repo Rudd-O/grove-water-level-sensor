@@ -1,4 +1,4 @@
-name: ESPHome Component CI
+name: ESPHome component QA
 
 on:
   push:
