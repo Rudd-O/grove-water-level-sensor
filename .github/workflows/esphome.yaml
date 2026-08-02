@@ -32,3 +32,6 @@ jobs:
         uses: docker://esphome/esphome:latest
         with:
           args: compile sample-device.yaml
+
+      - name: Remove validated config
+        run: sudo rm -fvr .esphome/storage
