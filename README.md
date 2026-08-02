@@ -70,9 +70,22 @@ sensor:
     name: Moisture
 ```
 
-## Configuration parameters for platform `grove_water_level`
+## Configuration parameters for sensor platform `grove_water_level`
 
-FIXME.
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `i2c_id` | [ID](https://esphome.io/guides/configuration-types#config-id) | (auto) | ID of the I2C bus to use. |
+| `low_address` | [I2C Address](https://esphome.io/components/i2c.html) | `0x77` (optional) | Optional low I2C address if not using defaults. |
+| `high_address` | [I2C Address](https://esphome.io/components/i2c.html) | `0x78` (optional) | Optional high I2C address if not using defaults. |
+| `water_level` | [Sensor Config](https://esphome.io/components/sensor/index.html) | None | Optional sensor entity for water level (unit: mm, device class: distance). |
+| `moisture` | [Sensor Config](https://esphome.io/components/sensor/index.html) | None | Optional sensor entity for moisture (unit: %, device class: moisture). |
+| `capacitor_max_value` | int | `248` | Maximum capacitor value, range 0–255. See below. |
+
+In addition, this component inherits standard options from ESPHome's [Polling Component](https://esphome.io/components/polling_component) (default update interval: 60s) and [I2C Device](https://esphome.io/components/i2c.html) base configurations.
+
+### Tuning `capacitor_max_value`
+
+To check what is the appropriate value for your sensor, set up your sensor to refresh every 1 second, then submerge the sensor in 10 cm of water while looking at the debug output of your ESP device, and check the values read.  Pick the minimum value across all 20 capacitor values.  The default shipped with this component is 248 which proved to be the smallest capacitance of all of my sensor's capacitors when fully submerged.
 
 ## Development
 
