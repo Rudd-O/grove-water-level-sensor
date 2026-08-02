@@ -27,6 +27,14 @@ namespace esphome::grove_water_level
         if (this->read_status != i2c::NO_ERROR)
         {
             this->status_set_warning();
+            if (this->level_sensor_ != nullptr)
+            {
+                this->level_sensor_->publish_state(NAN);
+            }
+            if (this->moisture_sensor_ != nullptr)
+            {
+                this->moisture_sensor_->publish_state(NAN);
+            }
             return; // FIXME make sensor unknown or unavailable
         }
 
@@ -76,7 +84,7 @@ namespace esphome::grove_water_level
         this->low_device_.read(this->read_data, 8);
         if (ret != i2c::NO_ERROR)
         {
-            ESP_LOGE(TAG, "Failed to read low device data: %d", ret);
+            ESP_LOGE(TAG, "Failed to read low device data; I2C ErrorCode: %d", ret);
             this->read_status = ret;
             return;
         }
@@ -84,7 +92,7 @@ namespace esphome::grove_water_level
         ret = this->high_device_.read(&this->read_data[8], 12);
         if (ret != i2c::NO_ERROR)
         {
-            ESP_LOGE(TAG, "Failed to read high device data: %d", ret);
+            ESP_LOGE(TAG, "Failed to read high device data; I2C ErrorCode: %d", ret);
             this->read_status = ret;
             return;
         }
