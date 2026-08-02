@@ -26,7 +26,7 @@ external_components:
       url: https://github.com/Rudd-O/grove-water-level-sensor
       ref: master
     components:
-    - water_level_sensor
+    - grove_water_level
 
 esp32:
   board: nodemcu-32s
@@ -49,7 +49,6 @@ wifi:
   ssid: !secret wifi_ssid
   password: !secret wifi_password
 
-
 i2c:
   sda: GPIO21
   scl: GPIO22
@@ -57,8 +56,8 @@ i2c:
   id: bus_a
 
 sensor:
-- platform: water_level_sensor
-  level:
+- platform: grove_water_level
+  water_level:
     # This indicates the water level by measuring capacitance bottom to top
     # and ignoring capacitance from capacitive cells above the water line,
     # which may read high capacitance due to water droplets.
@@ -66,4 +65,5 @@ sensor:
   moisture:
     # This indicates moisture by measuring capacitance across all capacitive
     # cells, summing each cell's 0-100% value and dividing by the number of cells.
+    name: Moisture
 ```

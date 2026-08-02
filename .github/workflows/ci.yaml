@@ -1,0 +1,34 @@
+name: ESPHome Component CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  esphome-ci:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Cache ESPHome platformio files
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.platformio
+            .esphome
+          key: ${{ runner.os }}-esphome-${{ hashFiles('sample-device.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-esphome-
+
+      - name: Run ESPHome Config Validation
+        uses: docker://esphome/esphome:latest
+        with:
+          args: config sample-device.yaml
+
+      - name: Run ESPHome Compile Test
+        uses: docker://esphome/esphome:latest
+        with:
+          args: compile sample-device.yaml
