@@ -3,12 +3,12 @@ import esphome.config_validation as cv
 from esphome.components import i2c, sensor
 from esphome.const import (
     CONF_ID,
+    CONF_MOISTURE,
     DEVICE_CLASS_DISTANCE,
     DEVICE_CLASS_MOISTURE,
     STATE_CLASS_MEASUREMENT,
     UNIT_MILLIMETER,
     UNIT_PERCENT,
-    CONF_MOISTURE,
 )
 
 DEPENDENCIES = ["i2c"]
