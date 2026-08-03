@@ -1,6 +1,6 @@
-# Grove water level sensor support for ESPHome
+# ESPHome support for Seeed Studio Grove water level sensor
 
-This project integrates the
+This project integrates the well-known
 [Grove water level sensor](https://wiki.seeedstudio.com/Grove-Water-Level-Sensor/)
 from Seeed Studio into ESPHome.
 
@@ -12,6 +12,18 @@ to resistive sensors.
 
 The sensor uses two I2C addresses (0x77 and 0x78) to probe a total of
 twenty distinct capacitors across its surface (10 cm of length).
+
+**I discourage the use of this sensor**.  I found two problems with it:
+
+1. On at least the Wemos D1 Mini ESP32, the low device bytes (8) cannot
+   be read reliably -- they all come out as 255.  That makes the sensor
+   unable to detect any water level below about 40%.  On such devices,
+   it may help to set the I2C frequency to 200 kHz to get some data
+   readout, but then the readout is unstable.
+2. The sensor has a catastrophic design issue -- if the sensor boots up
+   submerged in water, then none of the capacitors under water read any
+   value above zero, therefore code reading out the level from the sensor
+   shows a water level of 0 mm.
 
 ## How do I program my ESPHome device to use the sensor?
 
